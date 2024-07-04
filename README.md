@@ -1,2 +1,2 @@
-Proyecto Final Laboratorio III.
-Integrantes: Juan Igancio Manetta, Ignacio Menna, Fausto Pulido.
+Proyecto De Gemini.
+Ignacio Menna.

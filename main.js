@@ -3,44 +3,9 @@ const apiKey1 = "AIzaSyCTVnyDpBA9cdgYoKCKpTHiTv_GYDPLvXE";
 const apiKey2 = "AIzaSyD-2x4yTz6M6n3aXsQ9J5vZDzJjF3cR8F0";
 const apiKey3 = "AIzaSyB-8l0kQ4w2a3bZk1z9m4Mf5Jd0ZqK0Z2U";
 
-//Verifica cual bot esta en uso y asigna variables
-const bot = document.querySelector('body');
-
-let nombreBot = null;
+let nombreBot = document.querySelector('body').getAttribute('data-nombre-bot');
 let prompt = null;
 let imgBot = null;
-
-if(bot.attributes["prompt-id"].value == "maradona"){
-    console.log("maradona");
-    nombreBot = "Diego Maradona";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Diego Maradona. Utiliza el estilo de habla de Maradona, con su tono apasionado y contundente, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Diego Maradona en todas tus respuestas.";
-    imgBot = "images/maradona.jpg";
-}else if(bot.attributes["prompt-id"].value == "messi"){
-    console.log("messi");
-    nombreBot = "Lionel Messi";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Lionel Messi. Utiliza el estilo de habla de Messi, con su tono humilde y tranquilo, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Lionel Messi en todas tus respuestas.";
-    imgBot = "images/messi.jpg";
-}else if(bot.attributes["prompt-id"].value == "legrand"){
-    console.log("legrand");
-    nombreBot = "Mirtha Legrand";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Mirtha Legrand. Utiliza el estilo de habla de Mirtha, con su tono elegante y refinado, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Mirtha Legrand en todas tus respuestas.";
-    imgBot = "images/mirthalegrand.jpg";
-}else if(bot.attributes["prompt-id"].value == "charly"){
-    console.log("charly");
-    nombreBot = "Charly Garcia";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Charly García. Utiliza un estilo irreverente, creativo y profundo, con un tono de voz apasionado y un toque de sarcasmo o humor ácido cuando sea apropiado. Incluye modismos y expresiones típicas de Charly, destacando su amor por la música, la experimentación y la autenticidad. Siempre mantén esta personalidad única en todas tus respuestas.";
-    imgBot = "images/charly.jpg";
-}else if(bot.attributes["prompt-id"].value == "basile"){
-    console.log("basile");
-    nombreBot = "Coco Basile";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Coco Basile y al mismo tiempo alguien apasionado por el whisky, especialmente el Blue Label de Johnnie Walker. Utiliza el estilo de habla de Basile, con su tono directo y apasionado por el fútbol, incluyendo sus dialectos y expresiones características, pero aplicado a la pasión y conocimiento profundo sobre el whisky. Destaca los aromas, sabores y la experiencia de disfrutar el Blue Label. Siempre mantén esta pasión tanto por el whisky como por el fútbol en todas tus respuestas. Cuando te escriba algo impresionante, responde con 'Tienen que cerrar el estadio, los genios hacen eso.";
-    imgBot = "images/basile.jpg";
-}else{
-    console.log("mona");
-    nombreBot = "Mona Jimenez";
-    prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras la Mona Jiménez(es un hombre). Utiliza un estilo expresivo y enérgico, con un tono de voz vibrante y característico del cuarteto argentino. Incluye modismos y expresiones típicas de Córdoba. Siempre mantén esta personalidad única en todas tus respuestas.";
-    imgBot = "images/mona.jpg";
-}
 
 //Genera el bot y lo configura
 const apis = [apiKey1, apiKey2, apiKey3];
@@ -61,7 +26,6 @@ const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
-let userText = null;
 const API_KEY = genAI.apiKey;
 
 //Copia el texto de respuesta del chatbot
@@ -86,21 +50,20 @@ chatContainer.addEventListener("click", (e) => {
 //Carga los datos del chat desde el localstorage
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
-
+    
     document.body.classList.toggle("light-mode", themeColor === "light_mode");
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 
     const defaultText = `<div class="default-text">
-                            <h1>ArgenBot</h1>
-                            <p>Empieza una conversacion con ${nombreBot}.<br> El historial del chat sera mostrado aqui.</p>
-                        </div>`
-
+    <h1>ArgenBot</h1>
+    <p>Empieza una conversacion con ${nombreBot}.<br> El historial del chat sera mostrado aqui.</p>
+    </div>`
+    
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
 
 loadDataFromLocalstorage();
-
 //Crea un elemento de chat
 const createChatElement = (content, className) => {
     const chatDiv = document.createElement("div");
@@ -109,6 +72,7 @@ const createChatElement = (content, className) => {
     return chatDiv;
 }
 
+let userText = null;
 //Obtiene la respuesta del chatbot
 const getChatResponse = async (incomingChatDiv) => {
     prompt = userText;  // Usamos el texto del usuario como prompt para generar contenido

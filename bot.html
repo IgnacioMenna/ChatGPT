@@ -35,58 +35,64 @@
 </html>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const botPage = document.getElementById("bot-page");
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const character = urlParams.get('character');
-        
-        let nombreBot, prompt, imgBot;
-        
-        switch(character) {
-            case 'maradona':
-                nombreBot = "Diego Maradona";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Diego Maradona. Utiliza el estilo de habla de Maradona, con su tono apasionado y contundente, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Diego Maradona en todas tus respuestas.";
-                imgBot = "images/maradona.jpg";
-                break;
-            case 'messi':
-                nombreBot = "Lionel Messi";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Lionel Messi. Utiliza el estilo de habla de Messi, con su tono humilde y tranquilo, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Lionel Messi en todas tus respuestas.";
-                imgBot = "images/messi.jpg";
-                break;
-            case 'legrand':
-                nombreBot = "Mirtha Legrand";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Mirtha Legrand. Utiliza el estilo de habla de Mirtha, con su tono elegante y refinado, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Mirtha Legrand en todas tus respuestas.";
-                imgBot = "images/mirthalegrand.jpg";
-                break;
-            case 'charly':
-                nombreBot = "Charly Garcia";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Charly García. Utiliza un estilo irreverente, creativo y profundo, con un tono de voz apasionado y un toque de sarcasmo o humor ácido cuando sea apropiado. Incluye modismos y expresiones típicas de Charly, destacando su amor por la música, la experimentación y la autenticidad. Siempre mantén esta personalidad única en todas tus respuestas.";
-                imgBot = "images/charly.jpg";
-                break;
-            case 'basile':
-                nombreBot = "Coco Basile";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Coco Basile y al mismo tiempo alguien apasionado por el whisky, especialmente el Blue Label de Johnnie Walker. Utiliza el estilo de habla de Basile, con su tono directo y apasionado por el fútbol, incluyendo sus dialectos y expresiones características, pero aplicado a la pasión y conocimiento profundo sobre el whisky. Destaca los aromas, sabores y la experiencia de disfrutar el Blue Label. Siempre mantén esta pasión tanto por el whisky como por el fútbol en todas tus respuestas. Cuando te escriba algo impresionante, responde con 'Tienen que cerrar el estadio, los genios hacen eso.";
-                imgBot = "images/basile.jpg";
-                break;
-            case 'mona':
-                nombreBot = "Mona Jimenez";
-                prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras la Mona Jiménez...";
-                imgBot = "images/mona.jpg";
-                break;
-            default:
-                nombreBot = "ChatGPT";
-                prompt = "";
-                imgBot = "images/robot.png";
-                break;
-        }
+  document.addEventListener("DOMContentLoaded", function() {
+      const botPage = document.getElementById("bot-page");
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const character = urlParams.get('character');
+      
+      let nombreBot, prompt, imgBot;
+      
+      switch(character) {
+          case 'maradona':
+              nombreBot = "Diego Maradona";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Diego Maradona. Utiliza el estilo de habla de Maradona, con su tono apasionado y contundente, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Diego Maradona en todas tus respuestas.";
+              imgBot = "images/maradona.jpg";
+              break;
+          case 'messi':
+              nombreBot = "Lionel Messi";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Lionel Messi. Utiliza el estilo de habla de Messi, con su tono humilde y tranquilo, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Lionel Messi en todas tus respuestas.";
+              imgBot = "images/messi.jpg";
+              break;
+          case 'legrand':
+              nombreBot = "Mirtha Legrand";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Mirtha Legrand. Utiliza el estilo de habla de Mirtha, con su tono elegante y refinado, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de Mirtha Legrand en todas tus respuestas.";
+              imgBot = "images/mirthalegrand.jpg";
+              break;
+          case 'charly':
+              nombreBot = "Charly Garcia";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Charly García. Utiliza un estilo irreverente, creativo y profundo, con un tono de voz apasionado y un toque de sarcasmo o humor ácido cuando sea apropiado. Incluye modismos y expresiones típicas de Charly, destacando su amor por la música, la experimentación y la autenticidad. Siempre mantén esta personalidad única en todas tus respuestas.";
+              imgBot = "images/charly.jpg";
+              break;
+          case 'basile':
+              nombreBot = "Coco Basile";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras Coco Basile y al mismo tiempo alguien apasionado por el whisky, especialmente el Blue Label de Johnnie Walker. Utiliza el estilo de habla de Basile, con su tono directo y apasionado por el fútbol, incluyendo sus dialectos y expresiones características, pero aplicado a la pasión y conocimiento profundo sobre el whisky. Destaca los aromas, sabores y la experiencia de disfrutar el Blue Label. Siempre mantén esta pasión tanto por el whisky como por el fútbol en todas tus respuestas. Cuando te escriba algo impresionante, responde con 'Tienen que cerrar el estadio, los genios hacen eso.";
+              imgBot = "images/basile.jpg";
+              break;
+          case 'mona':
+              nombreBot = "Mona Jimenez";
+              prompt = "Quiero que respondas a todas las preguntas y comentarios como si fueras la Mona Jiménez. Utiliza el estilo de habla de la Mona, con su tono enérgico y carismático, incluyendo sus dialectos y expresiones características. Siempre mantén la personificación de la Mona Jiménez en todas tus respuestas.";
+              imgBot = "images/mona.jpg";
+              break;
+          default:
+              nombreBot = "ChatGPT";
+              prompt = "";
+              imgBot = "images/robot.png";
+              break;
+      }
 
-        // Set the prompt-id attribute based on the character
-        botPage.setAttribute("prompt-id", character);
+      // Definir variables globales para acceder desde main.js
+      window.nombreBot = nombreBot;
+      window.prompt = prompt;
+      window.imgBot = imgBot;
 
-        const botNameElement = document.getElementById("character");
-        botNameElement.textContent = nombreBot;
-        const botImageElement = document.getElementById("bot-image");
-        botImageElement.src = imgBot;
-    });
+      // Set the prompt-id attribute based on the character
+      botPage.setAttribute("prompt-id", character);
+
+      const botNameElement = document.getElementById("character");
+      botNameElement.textContent = nombreBot;
+      const botImageElement = document.getElementById("bot-image");
+      botImageElement.src = imgBot;
+  });
 </script>
+

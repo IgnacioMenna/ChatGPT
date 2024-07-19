@@ -124,7 +124,30 @@ span.material-symbols-rounded {
   padding-left: 25px;
   display: inline-flex;
 }
-
+.typing-animation .typing-dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  margin: 0 3px;
+  opacity: 0.7;
+  background: var(--text-color);
+  animation: animateDots 1.5s var(--delay) ease-in-out infinite;
+}
+.typing-animation .typing-dot:first-child {
+  margin-left: 0;
+}
+@keyframes animateDots {
+  0%,44% {
+    transform: translateY(0px);
+  }
+  28% {
+    opacity: 0.4;
+    transform: translateY(-6px);
+  }
+  44% {
+    opacity: 0.2;
+  }
+}
 /* Typing container estilos */
 .typing-container {
   position: fixed;
@@ -207,6 +230,79 @@ span.material-symbols-rounded {
     opacity: 0.2;
   }
 }
+
+/* menu */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  transition: left 0.3s;
+  z-index: 2;  
+}
+#toggle-navbar {
+  display: none;
+} 
+.abrir-navbar {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  padding: 1px;
+  z-index: 3;
+  transition: left 0.3s;
+  border-radius: 50%;
+}
+.abrir-navbar::after {
+  content: attr(data-open);
+}  
+#toggle-navbar:checked + .abrir-navbar::after {
+  content: attr(data-close);
+}  
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}  
+.nav-links li {
+  padding: 25px 0;
+}  
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  display: block;
+  padding: 10px 10px;
+  transition: background-color 0.3s;    
+}
+.nav-links a:hover {
+  background-color: #5366f5;
+}   
+#toggle-navbar:checked ~ .navbar {
+  left: 0px;
+  display:block;
+}  
+#toggle-navbar:checked ~ .abrir-navbar {
+  left: 250px;
+}  
+#toggle-navbar:checked ~ .contenido {
+  position:fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
 @media screen and (max-width: 600px) {
   .default-text h1 {
     font-size: 2.3rem;

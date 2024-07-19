@@ -17,18 +17,26 @@
     <script type="module" src="main.js"></script>
   </head>
   <body id="bot-page">
+    <input type="checkbox" id="toggle-navbar" />
+    <label for="toggle-navbar" class="abrir-navbar" data-open="☰" data-close="✖️"></label>
+    <nav class="navbar">
+        <h1 class="logo">ChatGPT</h1>
+        <ul class="nav-links">
+            <li class="active"><a href="#">Pagina Principal</a></li>
+            <li><a href="#">Tours</a></li>
+        </ul>
+    </nav>
     <div class="chat-container"></div>
-    
-    <!-- Typing contenedor -->
-    <div class="typing-container">
-      <div class="typing-content">
-        <div class="typing-textarea">
-          <textarea id="chat-input" spellcheck="false" placeholder="Escriba Aqui" required></textarea>
-          <span id="send-btn" class="material-symbols-rounded">send</span>
+      <div class="typing-container">
+        <div class="typing-content">
+          <div class="typing-textarea">
+            <textarea id="chat-input" spellcheck="false" placeholder="Escriba Aqui" required></textarea>
+            <span id="send-btn" class="material-symbols-rounded">send</span>
+          </div>
+          <div class="typing-controls">
+            <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
+            <span id="delete-btn" class="material-symbols-rounded">delete</span>
         </div>
-        <div class="typing-controls">
-          <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
-          <span id="delete-btn" class="material-symbols-rounded">delete</span>
       </div>
     </div>
   </body>
@@ -85,14 +93,6 @@
       window.nombreBot = nombreBot;
       window.prompt = prompt;
       window.imgBot = imgBot;
-
-      // Set the prompt-id attribute based on the character
-      botPage.setAttribute("prompt-id", character);
-
-      const botNameElement = document.getElementById("character");
-      botNameElement.textContent = nombreBot;
-      const botImageElement = document.getElementById("bot-image");
-      botImageElement.src = imgBot;
   });
 </script>
 

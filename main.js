@@ -12,10 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
     prompt = window.prompt;
     imgBot = window.imgBot;
 
-    console.log("Nombre del Bot:", nombreBot);
-    console.log("Prompt del Bot:", prompt);
-    console.log("Imagen del Bot:", imgBot);
-
     // Inicializa el bot y configura GoogleGenerativeAI
     const apis = [apiKey1, apiKey2, apiKey3];
     let indice = 0;
@@ -69,7 +65,7 @@ const loadDataFromLocalstorage = () => {
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 
     const defaultText = `<div class="default-text">
-    <h1>ArgenBot</h1>
+    <h1>ChatBOT</h1>
     <p>Empieza una conversacion con ${nombreBot}.<br> El historial del chat sera mostrado aqui.</p>
     </div>`;
     

@@ -24,15 +24,58 @@ document.addEventListener("DOMContentLoaded", function() {
     chat = model.startChat({
         history: [],
     });
-
-    // Carga los datos del chat desde el localstorage
+    
     loadDataFromLocalstorage();
 });
+
+const body = document.querySelector('body');
+const sidebar = body.querySelector('nav');
+const toggle = body.querySelector(".toggle");
+const searchBtn = body.querySelector(".search-box");
+const modeSwitch = body.querySelector(".toggle-switch");
+const modeText = body.querySelector(".mode-text");
+
+toggle.addEventListener("click", () => {
+  sidebar.classList.toggle("close");
+});
+
+searchBtn.addEventListener("click", () => {
+  sidebar.classList.remove("close");
+});
+
+// Cargar el tema desde localStorage
+const loadTheme = () => {
+  const themeColor = localStorage.getItem("themeColor");
+  if (themeColor === "dark") {
+    body.classList.add("dark");
+    modeText.innerText = "Light mode";
+  } else {
+    body.classList.remove("dark");
+    modeText.innerText = "Dark mode";
+  }
+};
+
+modeSwitch.addEventListener("click", () => {
+  body.classList.toggle("dark");
+});
+
+modeSwitch.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    if (body.classList.contains("dark")) {
+        modeText.innerText = "Light mode";
+        localStorage.setItem("themeColor", "dark"); // Guardar en localStorage
+    } else {
+        modeText.innerText = "Dark mode";
+        localStorage.setItem("themeColor", "light"); // Guardar en localStorage
+    }
+});
+
+// Cargar el tema desde localStorage
+loadTheme();
 
 const chatInput = document.querySelector("#chat-input");
 const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
-const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
 const API_KEY = genAI ? genAI.apiKey : null;
@@ -60,18 +103,35 @@ chatContainer.addEventListener("click", (e) => {
 // Carga los datos del chat desde el localstorage
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
-    
-    document.body.classList.toggle("light-mode", themeColor === "light_mode");
-    themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
+
+    // Asegúrate de que el botón de tema esté correctamente referenciado
+    const modeSwitch = document.querySelector(".toggle-switch");
+    const modeText = document.querySelector(".mode-text");
+
+    // Ajuste del modo oscuro
+    document.body.classList.toggle("dark", themeColor === "dark");
+    modeText.innerText = document.body.classList.contains("dark") ? "Light mode" : "Dark mode";
 
     const defaultText = `<div class="default-text">
-    <h1>ChatBOT</h1>
-    <p>Empieza una conversacion con ${nombreBot}.<br> El historial del chat sera mostrado aqui.</p>
+        <h1>ChatBOT</h1>
+        <p>Empieza una conversacion con ${nombreBot}.<br> El historial del chat sera mostrado aqui.</p>
     </div>`;
-    
+
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
-}
+};
+
+modeSwitch.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const themeColor = document.body.classList.contains("dark") ? "dark" : "light";
+    localStorage.setItem("themeColor", themeColor);
+
+    if (document.body.classList.contains("dark")) {
+        modeText.innerText = "Light mode";
+    } else {
+        modeText.innerText = "Dark mode";
+    }
+});
 
 // Crea un elemento de chat
 const createChatElement = (content, className) => {
@@ -172,12 +232,6 @@ deleteButton.addEventListener("click", () => {
     }
 });
 
-themeButton.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    localStorage.setItem("themeColor", themeButton.innerText);
-    themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
-});
-
 // Ajusta la altura del input de chat
 chatInput.addEventListener("input", () => {
     chatInput.style.height = `${initialInputHeight}px`;
@@ -185,7 +239,7 @@ chatInput.addEventListener("input", () => {
 });
 
 chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 600) {
         e.preventDefault();
         handleOutgoingChat();
     }
